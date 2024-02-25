@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://7c6us0xw4ebr"]
+
+[ext_resource type="Texture2D" uid="uid://bb1d1ddy0qjvu" path="res://icon.svg" id="1_akdvm"]
+[ext_resource type="Script" path="res://Player.gd" id="1_ecb0h"]
+[ext_resource type="Script" path="res://Catcher.gd" id="3_1wgqp"]
+[ext_resource type="Script" path="res://CreatureSpawner.gd" id="4_mq62t"]
+[ext_resource type="PackedScene" uid="uid://bqbpmy7lns7jg" path="res://bush.tscn" id="5_4sti4"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="5_n4erl"]
+[ext_resource type="FontFile" uid="uid://5c6dya66ubkp" path="res://Staatliches-Regular.ttf" id="6_5yxis"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3125t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4j2s"]
+size = Vector2(130, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7f2p8"]
+size = Vector2(63, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iso8q"]
+size = Vector2(126, 480)
+
+[node name="World" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(3000, 3000)
+mesh = SubResource("QuadMesh_3125t")
+
+[node name="Player" type="RigidBody2D" parent="."]
+z_as_relative = false
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_ecb0h")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+scale = Vector2(0.3, 0.4)
+texture = ExtResource("1_akdvm")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Player"]
+scale = Vector2(0.3, 0.4)
+shape = SubResource("RectangleShape2D_f4j2s")
+
+[node name="Catcher" type="RigidBody2D" parent="Player"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+freeze_mode = 1
+
+[node name="HandleCollider" type="CollisionShape2D" parent="Player/Catcher"]
+position = Vector2(-50.5, -6.5)
+shape = SubResource("RectangleShape2D_7f2p8")
+
+[node name="HandleSprite" type="Sprite2D" parent="Player/Catcher"]
+position = Vector2(-50, 0)
+scale = Vector2(0.5, 0.05)
+texture = ExtResource("1_akdvm")
+
+[node name="Net" type="Area2D" parent="Player/Catcher" node_paths=PackedStringArray("text")]
+position = Vector2(-63, 6)
+scale = Vector2(0.5, 0.05)
+script = ExtResource("3_1wgqp")
+text = NodePath("../../../Camera/Text")
+
+[node name="NetCollider" type="CollisionShape2D" parent="Player/Catcher/Net"]
+position = Vector2(9, 180)
+shape = SubResource("RectangleShape2D_iso8q")
+
+[node name="NetSprite" type="Sprite2D" parent="Player/Catcher/Net"]
+scale = Vector2(0.583, 2.855)
+texture = ExtResource("1_akdvm")
+
+[node name="CreatureSpawner" type="Node2D" parent="."]
+script = ExtResource("4_mq62t")
+
+[node name="Bush" parent="." instance=ExtResource("5_4sti4")]
+position = Vector2(258, 144)
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("5_n4erl")
+
+[node name="Text" type="RichTextLabel" parent="Camera"]
+offset_left = -565.0
+offset_top = -314.0
+offset_right = -227.0
+offset_bottom = -209.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_5yxis")
+theme_override_font_sizes/normal_font_size = 64
+text = "Caught: 0"
+
+[connection signal="body_entered" from="Player/Catcher/Net" to="Player/Catcher/Net" method="_on_body_entered"]

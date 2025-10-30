@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqbpmy7lns7jg"]
+[gd_scene load_steps=3 format=3 uid="uid://bqbpmy7lns7jg"]
 
-[ext_resource type="Script" path="res://Bush.gd" id="1_52pgj"]
+[ext_resource type="Script" uid="uid://dfbuxrlf7iitu" path="res://Bush.gd" id="1_52pgj"]
+[ext_resource type="Texture2D" uid="uid://cc5b2fhkvnb2h" path="res://bush.png" id="3_rqrer"]
 
 [node name="Bush" type="Node2D"]
 script = ExtResource("1_52pgj")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(6.00001, 7)
-scale = Vector2(0.651163, 0.651163)
-color = Color(0.227451, 0.372549, 0.180392, 1)
-polygon = PackedVector2Array(69.1071, 27.6429, 72.1785, -9.21426, 64.5, -35.3214, 43, -43, 19, -44, 11, -58, -26.1072, -49.1429, -42, -55, -79.8572, -47.6071, -93.6786, -23.0357, -89.0715, -1.53571, -90.6072, 19.9643, -88, 28)
+[node name="Bush" type="Sprite2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(-2, -13)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("3_rqrer")

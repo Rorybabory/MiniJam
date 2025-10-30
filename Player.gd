@@ -28,6 +28,13 @@ func hop_update(delta):
 	
 func update_catcher(delta):
 	target_rotvel = Input.get_axis("rot_left", "rot_right");
+	
+	if (absf(target_rotvel) > 0.1):
+		if (target_rotvel > 0):
+			catcher.get_node("Sprite").flip_v = true
+		else:
+			catcher.get_node("Sprite").flip_v = false
+	
 	rotvel = lerp(rotvel, target_rotvel, delta*5.0)
 	#catcher.angular_velocity = rotvel
 	catcher.rotate(rotvel * delta * 10.0)
@@ -55,3 +62,4 @@ func _process(delta):
 	update_catcher(delta)
 	linear_velocity = velocity;
 	pass
+

@@ -1,0 +1,81 @@
+[gd_scene load_steps=16 format=3 uid="uid://d028ri5uiqpbb"]
+
+[ext_resource type="Texture2D" uid="uid://bpgo1ssfam8fh" path="res://mainMenu.png" id="1_sliqd"]
+[ext_resource type="Script" uid="uid://dfnfw0eu40l4q" path="res://Button.gd" id="2_0a6g4"]
+[ext_resource type="AudioStream" uid="uid://cd7immm8abylk" path="res://sound/music.wav" id="2_d1y1q"]
+[ext_resource type="Script" uid="uid://dkj825qciiwhe" path="res://Button2.gd" id="3_n01ql"]
+[ext_resource type="Texture2D" uid="uid://c75cvcdnexpp8" path="res://tutorial.png" id="4_5i8qy"]
+[ext_resource type="Script" uid="uid://ba1usnyvcslxn" path="res://Tutorial.gd" id="6_jiua3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8nli1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i5vow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw12i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_17lm3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_it113"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wgvm6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lm0y8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0xy6d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxdbg"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MainMenu" type="Sprite2D" parent="Camera2D"]
+position = Vector2(1.55547, 3.00001)
+scale = Vector2(0.668519, 0.668519)
+texture = ExtResource("1_sliqd")
+
+[node name="Button" type="Button" parent="Camera2D"]
+offset_left = -176.0
+offset_top = 34.0
+offset_right = 91.0
+offset_bottom = 161.0
+theme_override_constants/outline_size = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8nli1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i5vow")
+script = ExtResource("2_0a6g4")
+
+[node name="Button2" type="Button" parent="Camera2D"]
+offset_left = -139.0
+offset_top = 216.0
+offset_right = 36.0
+offset_bottom = 308.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gw12i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_17lm3")
+script = ExtResource("3_n01ql")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_d1y1q")
+autoplay = true
+
+[node name="Tutorial" type="Sprite2D" parent="."]
+position = Vector2(-10, 32)
+scale = Vector2(0.459759, 0.459759)
+texture = ExtResource("4_5i8qy")
+script = ExtResource("6_jiua3")
+
+[node name="Button" type="Button" parent="Tutorial"]
+offset_left = -1386.0
+offset_top = -850.0
+offset_right = 1438.0
+offset_bottom = 768.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_it113")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wgvm6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lm0y8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_0xy6d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxdbg")
+
+[connection signal="pressed" from="Camera2D/Button" to="Camera2D/Button" method="_on_pressed"]
+[connection signal="pressed" from="Camera2D/Button2" to="Tutorial" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Tutorial/Button" to="Tutorial" method="_on_button_pressed"]

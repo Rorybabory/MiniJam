@@ -10,11 +10,13 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_body_entered(body):
-	if (body.is_in_group("Catchable") and rot_velocity > 4):
+	if (body.is_in_group("Catchable") and absf(rot_velocity) > 4):
 		body.queue_free()
 		print("CAUGHT")
 		num_caught += 1
-		text.text = "Caught: " + str(num_caught)
+		text.text = " Caught: " + str(num_caught)
+		if (not $swoosh.playing):
+			$swoosh.play();
 	
 	#if body.is_in_group("collectible"):
 	#	pass

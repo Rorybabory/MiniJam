@@ -4,7 +4,7 @@ var creature = preload("res://creature.tscn");
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
-	for n in range(10):
+	for n in range(4):
 		var inst = creature.instantiate()
 		inst.global_position.x = randf_range ( -500, 500 )
 		inst.global_position.y = randf_range ( -300, 300 )
